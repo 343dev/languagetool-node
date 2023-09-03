@@ -2,6 +2,13 @@
   "name": "@343dev/languagetool-node",
   "version": "1.0.4",
   "description": "Node.js wrapper for LanguageTool",
+  "keywords": [
+    "spellcheck",
+    "grammar",
+    "spelling",
+    "languagetool",
+    "grammar-checker"
+  ],
   "license": "MIT",
   "author": "Andrey Warkentin (https://github.com/343dev)",
   "repository": {
