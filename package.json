@@ -1,12 +1,12 @@
 {
-  "name": "@funboxteam/languagetool-node",
+  "name": "@343dev/languagetool-node",
   "version": "1.0.4",
   "description": "Node.js wrapper for LanguageTool",
   "license": "MIT",
-  "author": "Andrey Ivanov (https://github.com/343dev)",
+  "author": "Andrey Warkentin (https://github.com/343dev)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/funbox/languagetool-node"
+    "url": "https://github.com/343dev/languagetool-node"
   },
   "main": "index.js",
   "bin": {
@@ -22,7 +22,6 @@
   "scripts": {
     "lint": "eslint --cache ./",
     "postinstall": "node install.js",
-    "prepublishOnly": "if [ -z \"$CI\" ]; then lawyer; fi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
