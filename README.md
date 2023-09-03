@@ -1,11 +1,11 @@
-# @funboxteam/languagetool-node
+# @343dev/languagetool-node
 
 <img align="right" width="192" height="192"
      src="./logo.png">
 
-[![npm](https://img.shields.io/npm/v/@funboxteam/languagetool-node.svg)](https://www.npmjs.com/package/@funboxteam/languagetool-node)
+[![npm](https://img.shields.io/npm/v/@343dev/languagetool-node.svg)](https://www.npmjs.com/package/@343dev/languagetool-node)
 
-CLI spell and grammar checker. 
+CLI spell and grammar checker.
 Uses [LanguageTool](https://github.com/languagetool-org/languagetool) under the hood.
 
 [По-русски](./README.ru.md)
@@ -13,27 +13,27 @@ Uses [LanguageTool](https://github.com/languagetool-org/languagetool) under the 
 ## Rationale
 
 Some projects have a lot of documentation inside the repos. Once we decided to start linting their
-grammar and check for spelling errors. But we didn't want to send our docs 
-to the unknown servers of the well-known services. 
+grammar and check for spelling errors. But we didn't want to send our docs
+to the unknown servers of the well-known services.
 
-Hence, we decided to build our own CLI tool upon the LanguageTool.   
+Hence, we decided to build our own CLI tool upon the LanguageTool.
 
 ## Getting Started
 
-LanguageTool requires Java to work, so first of all go to [java.com](https://www.java.com) and download it. 
+LanguageTool requires Java to work, so first of all go to [java.com](https://www.java.com) and download it.
 
 Then install the package:
 
 ```bash
-npm i -g @funboxteam/languagetool-node
+npm i -g @343dev/languagetool-node
 ```
 
 It's recommended to install the package globally, because archive with LanguageTool will be downloaded
-(≈250 MB) and unzipped it into the package directory. 
+(≈250 MB) and unzipped it into the package directory.
 
 ## Usage
 
-The tool can check the passed files or the text from STDIN. 
+The tool can check the passed files or the text from STDIN.
 
 Check files:
 
@@ -55,7 +55,7 @@ echo "Insert your text here .. or check this textt. LanguageTool 4.0 were releas
 
 <details>
   <summary>Output example</summary>
-  
+
   ```bash
   $ echo "Insert your text here .. or check this textt. LanguageTool 4.0 were releasd on Thursday 29 december 2017." | languagetool-node
 
@@ -63,22 +63,22 @@ echo "Insert your text here .. or check this textt. LanguageTool 4.0 were releas
     1:23  warning  Two consecutive dots                                        typographical  spell
   Context: «Insert your text here .. or check this textt. LanguageTool 4.0 w...»
   Possible replacements: «.»
-  
+
     1:26  warning  This sentence does not start with an uppercase letter       typographical  spell
   Context: «Insert your text here .. or check this textt. LanguageTool 4.0 were...»
   Possible replacements: «Or»
-  
+
     1:40  warning  Possible spelling mistake found                             misspelling    spell
   Context: «Insert your text here .. or check this textt. LanguageTool 4.0 were releasd on Thurs...»
   Possible replacements: «text, texts, text t»
-  
+
     1:69  warning  Possible spelling mistake found                             misspelling    spell
   Context: «...check this textt. LanguageTool 4.0 were releasd on Thursday 29 december 2017. »
   Possible replacements: «released, release»
-  
+
     1:80  warning  The date 29 december 2017 is not a Thursday, but a Friday.  inconsistency  spell
   Context: «...textt. LanguageTool 4.0 were releasd on Thursday 29 december 2017. »
-  
+
   ⚠ 5 warnings
   ```
 </details>
@@ -102,5 +102,3 @@ module.exports = {
 ## Credits
 
 The picture for the project was made by [Sergey Mylnikov](https://www.behance.net/s_mylnikov) & [Igor Garybaldi](https://pandabanda.com/).
-
-[![Sponsored by FunBox](https://funbox.ru/badges/sponsored_by_funbox_centered.svg)](https://funbox.ru)
