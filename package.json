@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "@funboxteam/diamonds": "6.6.0",
-    "@funboxteam/free-port-finder": "3.1.0",
     "axios": "0.21.2",
     "deepmerge": "3.2.0",
     "node-stream-zip": "1.8.0",
