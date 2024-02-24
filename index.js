@@ -20,14 +20,12 @@ if (!checkJavaInstalled()) {
   process.exit(1);
 }
 
-/* eslint-disable import/no-dynamic-require */
 const configName = '.languagetoolrc.js';
 const defaultConfig = require(`./${configName}`);
 const externalConfigPath = path.join(os.homedir(), configName);
 const appConfig = fs.existsSync(externalConfigPath)
   ? deepmerge(defaultConfig, require(externalConfigPath))
   : defaultConfig;
-/* eslint-enable import/no-dynamic-require */
 
 const processArgs = process.argv.slice(2);
 

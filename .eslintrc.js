@@ -1,6 +1,8 @@
 module.exports = {
-  extends: '@funboxteam',
   env: {
     node: true,
   },
+  parserOptions: {
+    ecmaVersion: 'latest',
+  }
 };
