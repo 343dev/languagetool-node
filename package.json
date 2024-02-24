@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "axios": "0.21.2",
-    "deepmerge": "3.2.0",
+    "deepmerge": "^4.3.1",
     "node-stream-zip": "1.8.0",
     "ora": "3.4.0",
     "progress": "2.0.3",
@@ -49,8 +49,7 @@
     "simple-git-hooks": "^2.9.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged",
-    "post-commit": "git update-index --again"
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*.js": "eslint --fix"
