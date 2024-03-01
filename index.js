@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const axios = require('axios');
 const deepmerge = require('deepmerge');
 const fs = require('fs');
 const os = require('os');
@@ -52,15 +51,15 @@ async function check(vfiles) {
 		const { port } = await startLanguageToolServer();
 
 		for (const vfile of vfiles) {
-			// eslint-disable-next-line no-await-in-loop
-			const matches = await axios({
-				url: `http://127.0.0.1:${port}/v2/check`,
-				method: 'post',
-				params: {
+			const response = await fetch(`http://127.0.0.1:${port}/v2/check`, { // eslint-disable-line no-await-in-loop
+				method: 'POST',
+				body: new URLSearchParams({
 					language: 'auto',
 					text: String(vfile.contents),
-				},
-			}).then(response => response.data.matches);
+				}).toString(),
+			});
+
+			const { matches } = await response.json(); // eslint-disable-line no-await-in-loop
 
 			const filteredMatches = matches.filter(match => {
 				const ctx = match.context;

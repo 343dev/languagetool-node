@@ -33,7 +33,6 @@
     "update-git-hooks": "npx simple-git-hooks"
   },
   "dependencies": {
-    "axios": "0.21.2",
     "deepmerge": "^4.3.1",
     "node-stream-zip": "^1.15.0",
     "ora": "3.4.0",
