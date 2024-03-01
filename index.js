@@ -2,8 +2,8 @@
 
 const deepmerge = require('deepmerge');
 const fs = require('fs');
+const { createSpinner } = require('nanospinner');
 const os = require('os');
-const ora = require('ora');
 const path = require('path');
 const reporter = require('vfile-reporter');
 
@@ -45,7 +45,7 @@ if (files.length) {
 }
 
 async function check(vfiles) {
-	const spinner = ora('Processing...').start();
+	const spinner = createSpinner().start({ text: 'Processing...' });
 
 	try {
 		const { port } = await startLanguageToolServer();
@@ -74,10 +74,10 @@ async function check(vfiles) {
 			}
 		}
 
-		spinner.stop();
+		spinner.clear();
 		console.log(reporter(vfiles, { quiet: true }));
 	} catch (err) {
-		spinner.stop();
+		spinner.clear();
 		error(err);
 		process.exitCode = 1;
 	}

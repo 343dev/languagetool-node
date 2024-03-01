@@ -34,8 +34,8 @@
   },
   "dependencies": {
     "deepmerge": "^4.3.1",
+    "nanospinner": "^1.1.0",
     "node-stream-zip": "^1.15.0",
-    "ora": "3.4.0",
     "progress": "2.0.3",
     "vfile": "4.0.0",
     "vfile-location": "2.0.4",
