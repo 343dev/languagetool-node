@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   downloadUrls: {
     stable: {
       url: 'https://languagetool.org/download/LanguageTool-4.4.zip',

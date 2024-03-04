@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 
-const deepmerge = require('deepmerge');
-const fs = require('fs');
-const { createSpinner } = require('nanospinner');
-const os = require('os');
-const path = require('path');
-const reporter = require('vfile-reporter');
+import deepmerge from 'deepmerge';
+import { createSpinner } from 'nanospinner';
+import reporter from 'vfile-reporter';
 
-const checkJavaInstalled = require('./lib/check-java-installed');
-const createVfile = require('./lib/create-vfile');
-const generateReport = require('./lib/generate-report');
-const { error, info } = require('./lib/log');
-const startLanguageToolServer = require('./lib/start-language-tool-server');
+import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
+
+import defaultAppConfig from './.languagetoolrc.js';
+
+import checkJavaInstalled from './lib/check-java-installed.js';
+import createVfile from './lib/create-vfile.js';
+import findConfig from './lib/find-config.js';
+import generateReport from './lib/generate-report.js';
+import { error, info } from './lib/log.js';
+import startLanguageToolServer from './lib/start-language-tool-server.js';
 
 if (!checkJavaInstalled()) {
 	error('To use this command-line tool you need to install a JDK.');
@@ -19,12 +22,27 @@ if (!checkJavaInstalled()) {
 	process.exit(1);
 }
 
-const configName = '.languagetoolrc.js';
-const defaultConfig = require(`./${configName}`);
-const externalConfigPath = path.join(os.homedir(), configName);
-const appConfig = fs.existsSync(externalConfigPath)
-	? deepmerge(defaultConfig, require(externalConfigPath))
-	: defaultConfig;
+const currentConfigPath = pathToFileURL(findConfig());
+const currentConfig = await import(currentConfigPath);
+const currentConfigData = currentConfig.default;
+
+const combineMerge = (target, source, options) => {
+	const destination = target.slice();
+
+	source.forEach((item, index) => {
+		if (typeof destination[index] === 'undefined') {
+			destination[index] = options.cloneUnlessOtherwiseSpecified(item, options);
+		} else if (options.isMergeableObject(item)) {
+			destination[index] = deepmerge(target[index], item, options);
+		} else if (target.indexOf(item) === -1) {
+			destination.push(item);
+		}
+	});
+
+	return destination;
+};
+
+const appConfig = deepmerge(defaultAppConfig, currentConfigData, { arrayMerge: combineMerge });
 
 const processArgs = process.argv.slice(2);
 

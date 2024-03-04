@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const url = require('url');
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import url from 'node:url';
 
-const appConfig = require('./.languagetoolrc');
+import appConfig from './.languagetoolrc.js';
 
-const downloadLanguageTool = require('./lib/download-language-tool');
-const { error, info, success } = require('./lib/log');
-const unzipFile = require('./lib/unzip-file');
+import downloadLanguageTool from './lib/download-language-tool.js';
+import { error, info, success } from './lib/log.js';
+import unzipFile from './lib/unzip-file.js';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 install();
 
