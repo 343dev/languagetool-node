@@ -7,9 +7,9 @@ const url = require('url');
 
 const appConfig = require('./.languagetoolrc');
 
-const downloadLanguageTool = require('./lib/downloadLanguageTool');
+const downloadLanguageTool = require('./lib/download-language-tool');
 const { error, info, success } = require('./lib/log');
-const unzipFile = require('./lib/unzipFile');
+const unzipFile = require('./lib/unzip-file');
 
 install();
 

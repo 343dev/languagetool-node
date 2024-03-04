@@ -7,11 +7,11 @@ const os = require('os');
 const path = require('path');
 const reporter = require('vfile-reporter');
 
-const checkJavaInstalled = require('./lib/checkJavaInstalled');
-const createVfile = require('./lib/createVfile');
-const generateReport = require('./lib/generateReport');
+const checkJavaInstalled = require('./lib/check-java-installed');
+const createVfile = require('./lib/create-vfile');
+const generateReport = require('./lib/generate-report');
 const { error, info } = require('./lib/log');
-const startLanguageToolServer = require('./lib/startLanguageToolServer');
+const startLanguageToolServer = require('./lib/start-language-tool-server');
 
 if (!checkJavaInstalled()) {
 	error('To use this command-line tool you need to install a JDK.');
