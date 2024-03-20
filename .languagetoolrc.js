@@ -1,8 +1,8 @@
-module.exports = {
+export default {
   downloadUrls: {
     stable: {
-      url: 'https://languagetool.org/download/LanguageTool-4.4.zip',
-      md5: '4b227ba34e6326227859278a9ce77cc1',
+			url: 'https://languagetool.org/download/LanguageTool-6.3.zip',
+			md5: '78ae790647488e8602833e56c1fbae17',
     },
   },
   ignore: [

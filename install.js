@@ -1,48 +1,52 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const url = require('url');
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import url from 'node:url';
 
-const appConfig = require('./.languagetoolrc');
+import appConfig from './.languagetoolrc.js';
 
-const downloadLanguageTool = require('./lib/downloadLanguageTool');
-const { error, info, success } = require('./lib/log');
-const unzipFile = require('./lib/unzipFile');
+import downloadLanguageTool from './lib/download-language-tool.js';
+import { error, info, success } from './lib/log.js';
+import unzipFile from './lib/unzip-file.js';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 install();
 
 async function install() {
-  try {
-    const { url: zipUrl, md5 } = appConfig.downloadUrls.stable;
+	try {
+		const { url: zipUrl, md5 } = appConfig.downloadUrls.stable;
 
-    const urlParts = url.parse(zipUrl, true);
-    const { base, name } = path.parse(decodeURIComponent(urlParts.pathname));
+		const urlParts = url.parse(zipUrl, true);
+		const { base, name } = path.parse(decodeURIComponent(urlParts.pathname));
 
-    const savePath = path.resolve(fs.realpathSync(os.tmpdir()), base);
-    const installPath = __dirname;
-    const finalPath = path.join(installPath, 'languagetool');
+		const savePath = path.resolve(fs.realpathSync(os.tmpdir()), base);
+		const installPath = __dirname;
+		const finalPath = path.join(installPath, 'languagetool');
 
-    if (fs.existsSync(finalPath)) return;
+		if (fs.existsSync(finalPath)) {
+			return;
+		}
 
-    console.log();
-    await downloadLanguageTool({ url: zipUrl, md5, savePath });
+		console.log();
+		await downloadLanguageTool({ url: zipUrl, md5, savePath });
 
-    console.log();
-    await unzipFile(savePath, installPath);
+		console.log();
+		await unzipFile(savePath, installPath);
 
-    console.log();
-    info(`Rename "${name}" to "languagetool" ...`);
-    fs.renameSync(path.resolve(installPath, name), finalPath);
-    success('Done!');
+		console.log();
+		info(`Rename "${name}" to "languagetool" ...`);
+		fs.renameSync(path.resolve(installPath, name), finalPath);
+		success('Done!');
 
-    console.log();
-    info('Remove temp files ...');
-    fs.unlinkSync(savePath);
-    success('Done!');
-  } catch (err) {
-    error(err);
-    process.exit(1);
-  }
+		console.log();
+		info('Remove temp files ...');
+		fs.unlinkSync(savePath);
+		success('Done!');
+	} catch (err) {
+		error(err);
+		process.exit(1);
+	}
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0 (21.03.2024)
+
+* Package now is [pure ESM](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+* Minimum Node.js version is 18.17.
+* LanguageTool version is set to 6.3. See [CHANGES.md](https://languagetool.org/download/CHANGES.md).
+
 ## 1.0.4 (10.06.2021)
 
 Fixed several security vulnerabilities:
@@ -11,7 +17,6 @@ Fixed several security vulnerabilities:
 - [Command Injection](https://github.com/advisories/GHSA-35jh-r3h4-6jhm) in [lodash](https://github.com/lodash/lodash). Updated from 4.17.20 to 4.17.21.
 
 - and others.
-
 
 ## 1.0.3 (05.02.2021)
 
