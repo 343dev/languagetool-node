@@ -41,7 +41,7 @@
     "nanospinner": "^1.1.0",
     "node-stream-zip": "^1.15.0",
     "progress": "2.0.3",
-    "vfile": "4.0.0",
+    "vfile": "^6.0.1",
     "vfile-location": "2.0.4",
     "vfile-reporter": "5.1.1"
   },

@@ -73,7 +73,7 @@ async function check(vfiles) {
 				method: 'POST',
 				body: new URLSearchParams({
 					language: 'auto',
-					text: String(vfile.contents),
+					text: String(vfile.value),
 				}).toString(),
 			});
 
