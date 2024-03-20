@@ -2,7 +2,7 @@
 
 import deepmerge from 'deepmerge';
 import { createSpinner } from 'nanospinner';
-import reporter from 'vfile-reporter';
+import { reporter } from 'vfile-reporter';
 
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
