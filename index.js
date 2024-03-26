@@ -27,24 +27,24 @@ const currentConfig = await import(currentConfigPath);
 const currentConfigData = currentConfig.default;
 
 const combineMerge = (target, source, options) => {
-	const destination = target.slice();
+	const destination = [...target];
 
-	source.forEach((item, index) => {
-		if (typeof destination[index] === 'undefined') {
+	for (const [index, item] of source.entries()) {
+		if (destination[index] === undefined) {
 			destination[index] = options.cloneUnlessOtherwiseSpecified(item, options);
 		} else if (options.isMergeableObject(item)) {
 			destination[index] = deepmerge(target[index], item, options);
-		} else if (target.indexOf(item) === -1) {
+		} else if (!target.includes(item)) {
 			destination.push(item);
 		}
-	});
+	}
 
 	return destination;
 };
 
 const appConfig = deepmerge(defaultAppConfig, currentConfigData, { arrayMerge: combineMerge });
 
-const processArgs = process.argv.slice(2);
+const processArguments = process.argv.slice(2);
 
 let files = [];
 
@@ -53,13 +53,13 @@ if (!process.stdin.isTTY && process.platform !== 'win32') {
 	// That's why it's turned off here, and it's impossible to use STDIN in Windows.
 	files.push(createVfile());
 } else {
-	files = processArgs
+	files = processArguments
 		.filter(file => fs.existsSync(file))
-		.map(createVfile);
+		.map(createVfile); // eslint-disable-line unicorn/no-array-callback-reference
 }
 
-if (files.length) {
-	check(files);
+if (files.length > 0) {
+	await check(files);
 }
 
 async function check(vfiles) {
@@ -80,13 +80,13 @@ async function check(vfiles) {
 			const { matches } = await response.json(); // eslint-disable-line no-await-in-loop
 
 			const filteredMatches = matches.filter(match => {
-				const ctx = match.context;
-				const badWord = ctx.text.slice(ctx.offset, ctx.offset + ctx.length);
+				const { context } = match;
+				const badWord = context.text.slice(context.offset, context.offset + context.length);
 
-				return !appConfig.ignore.some(goodWord => RegExp(`^${goodWord}$`, 'i').test(badWord));
+				return !appConfig.ignore.some(goodWord => new RegExp(`^${goodWord}$`, 'i').test(badWord));
 			});
 
-			if (filteredMatches.length) {
+			if (filteredMatches.length > 0) {
 				generateReport({ matches: filteredMatches, vfile });
 				process.exitCode = 1;
 			}
@@ -94,9 +94,9 @@ async function check(vfiles) {
 
 		spinner.clear();
 		console.log(reporter(vfiles, { quiet: true }));
-	} catch (err) {
+	} catch (error_) {
 		spinner.clear();
-		error(err);
+		error(error_);
 		process.exitCode = 1;
 	}
 

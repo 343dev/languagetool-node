@@ -13,7 +13,7 @@ import unzipFile from './lib/unzip-file.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-install();
+await install();
 
 async function install() {
 	try {
@@ -45,8 +45,8 @@ async function install() {
 		info('Remove temp files ...');
 		fs.unlinkSync(savePath);
 		success('Done!');
-	} catch (err) {
-		error(err);
+	} catch (error_) {
+		error(error_);
 		process.exit(1);
 	}
 }
