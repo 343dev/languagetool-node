@@ -58,5 +58,25 @@
   },
   "lint-staged": {
     "*.js": "eslint --fix"
-  }
+  },
+	"eslintConfig": {
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"xo",
+			"plugin:unicorn/recommended"
+		],
+		"plugins": [
+			"import"
+		],
+		"rules": {
+			"unicorn/no-array-reduce": "off",
+			"no-warning-comments": "off",
+			"object-curly-spacing": [
+				"error",
+				"always"
+			]
+		}
+	}
 }
