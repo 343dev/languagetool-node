@@ -48,7 +48,6 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-config-xo": "^0.44.0",
-    "eslint-plugin-import": "^2.29.1",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.11.0"
   },
@@ -64,9 +63,6 @@
     },
     "extends": [
       "xo"
-    ],
-    "plugins": [
-      "import"
     ],
     "rules": {
       "no-warning-comments": "off",
