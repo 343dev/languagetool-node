@@ -46,6 +46,7 @@
     "vfile-reporter": "^8.1.0"
   },
   "devDependencies": {
+    "@343dev/eslint-config": "^1.0.0",
     "eslint": "^8.57.0",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.11.0"
@@ -57,15 +58,6 @@
     "*.js": "eslint --fix"
   },
   "eslintConfig": {
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "no-warning-comments": "off",
-      "object-curly-spacing": [
-        "error",
-        "always"
-      ]
-    }
+    "extends": "@343dev"
   }
 }
