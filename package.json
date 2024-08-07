@@ -1,6 +1,6 @@
 {
   "name": "@343dev/languagetool-node",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Node.js wrapper for LanguageTool",
   "keywords": [
     "spellcheck",
@@ -41,17 +41,15 @@
     "nanospinner": "^1.1.0",
     "node-stream-zip": "^1.15.0",
     "progress": "^2.0.3",
-    "vfile": "^6.0.1",
-    "vfile-location": "^5.0.2",
-    "vfile-reporter": "^8.1.0"
+    "vfile": "^6.0.2",
+    "vfile-location": "^5.0.3",
+    "vfile-reporter": "^8.1.1"
   },
   "devDependencies": {
+    "@343dev/eslint-config": "^1.0.0",
     "eslint": "^8.57.0",
-    "eslint-config-xo": "^0.44.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-unicorn": "^51.0.1",
-    "lint-staged": "^15.2.2",
-    "simple-git-hooks": "^2.11.0"
+    "lint-staged": "^15.2.8",
+    "simple-git-hooks": "^2.11.1"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
@@ -60,23 +58,6 @@
     "*.js": "eslint --fix"
   },
   "eslintConfig": {
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "xo",
-      "plugin:unicorn/recommended"
-    ],
-    "plugins": [
-      "import"
-    ],
-    "rules": {
-      "unicorn/no-array-reduce": "off",
-      "no-warning-comments": "off",
-      "object-curly-spacing": [
-        "error",
-        "always"
-      ]
-    }
+    "extends": "@343dev"
   }
 }
