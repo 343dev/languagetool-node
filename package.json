@@ -49,7 +49,7 @@
     "@343dev/eslint-config": "^1.0.0",
     "eslint": "^8.57.0",
     "lint-staged": "^15.2.8",
-    "simple-git-hooks": "^2.11.0"
+    "simple-git-hooks": "^2.11.1"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
