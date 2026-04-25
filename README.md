@@ -3,6 +3,7 @@
 <img align="right" width="192" height="192"
      src="./logo.png">
 
+[![NPM Downloads](https://img.shields.io/npm/dw/%40343dev%2Flanguagetool-node)](https://www.npmjs.com/package/@343dev/languagetool-node)
 [![npm](https://img.shields.io/npm/v/@343dev/languagetool-node.svg)](https://www.npmjs.com/package/@343dev/languagetool-node)
 
 CLI spell and grammar checker.
