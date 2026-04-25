@@ -8,8 +8,6 @@
 CLI spell and grammar checker.
 Uses [LanguageTool](https://github.com/languagetool-org/languagetool) under the hood.
 
-[По-русски](./README.ru.md)
-
 ## Rationale
 
 Some projects have a lot of documentation inside the repos. Once we decided to start linting their
