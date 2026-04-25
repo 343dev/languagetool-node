@@ -101,3 +101,10 @@ module.exports = {
 ## Credits
 
 The picture for the project was made by [Sergey Mylnikov](https://www.behance.net/s_mylnikov) & [Igor Garybaldi](https://pandabanda.com/).
+
+## Other projects
+
+- 🖼 [optimizt](https://github.com/343dev/optimizt) — CLI tool for image optimization: compresses PNG, JPEG, GIF, SVG, and creates AVIF/WebP
+- 📦 [harold](https://github.com/343dev/harold) — CLI tool that compares frontend project bundle sizes between snapshots
+- 🐳 [jailbot](https://github.com/343dev/jailbot) — Docker container wrapper with automatic filesystem path mounting
+- 📝 [markdown-lint](https://github.com/343dev/markdown-lint) — Markdown code style linter based on Prettier, Remark, and Typograf
