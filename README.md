@@ -1,6 +1,6 @@
 # @343dev/languagetool-node
 
-<img align="right" width="192" height="192"
+<img align="right" width="124" height="124"
      src="./logo.png">
 
 [![NPM Downloads](https://img.shields.io/npm/dw/%40343dev%2Flanguagetool-node)](https://www.npmjs.com/package/@343dev/languagetool-node)
