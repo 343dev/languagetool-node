@@ -1,5 +1,31 @@
 # Changelog
 
+## 3.0.0
+
+**Breaking change.** The package no longer manages the LanguageTool lifecycle.
+
+* Removed the `postinstall` script that downloaded and unpacked a LanguageTool archive during installation.
+* Removed automatic Java checks and local Java-based LanguageTool server startup.
+* Removed the project `Dockerfile`.
+* Removed installer-only dependencies `node-stream-zip` and `progress`.
+
+The CLI now connects to an externally managed LanguageTool HTTP service.
+
+Migration:
+
+1. Run a LanguageTool HTTP service yourself (e.g. the `meyay/languagetool` or `erikvl87/languagetool` Docker images).
+2. If it is not reachable at `http://127.0.0.1:8081`, configure it in `~/.languagetoolrc.js`:
+
+   ```javascript
+   export default {
+     languageTool: {
+       url: 'http://127.0.0.1:8081',
+     },
+   };
+   ```
+
+`/v2/check` is appended to the configured base URL, preserving any path prefix.
+
 ## 2.0.0 (21.03.2024)
 
 * Package now is [pure ESM](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).

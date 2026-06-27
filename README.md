@@ -7,7 +7,7 @@
 [![npm](https://img.shields.io/npm/v/@343dev/languagetool-node.svg)](https://www.npmjs.com/package/@343dev/languagetool-node)
 
 CLI spell and grammar checker.
-Uses [LanguageTool](https://github.com/languagetool-org/languagetool) under the hood.
+Sends checks to an externally managed [LanguageTool](https://github.com/languagetool-org/languagetool) HTTP service.
 
 ## Rationale
 
@@ -19,16 +19,29 @@ Hence, we decided to build our own CLI tool upon the LanguageTool.
 
 ## Getting Started
 
-LanguageTool requires Java to work, so first of all go to [java.com](https://www.java.com) and download it.
+Since version 3.0 this package no longer downloads, installs, or starts LanguageTool.
+You must run a LanguageTool HTTP service yourself and point the CLI at it.
 
-Then install the package:
+Install the package:
 
 ```bash
 npm i -g @343dev/languagetool-node
 ```
 
-It's recommended to install the package globally, because archive with LanguageTool will be downloaded
-(≈250 MB) and unzipped it into the package directory.
+Run a LanguageTool service. The easiest way is an official-style Docker image, for example:
+
+- [`meyay/languagetool`](https://hub.docker.com/r/meyay/languagetool)
+- [`erikvl87/languagetool`](https://hub.docker.com/r/erikvl87/languagetool)
+
+Example:
+
+```bash
+docker run --rm -p 8081:8081 erikvl87/languagetool
+```
+
+Check the selected image's documentation for its exposed port and configuration.
+The CLI defaults to `http://127.0.0.1:8081`. If your service runs elsewhere, set
+`languageTool.url` in `~/.languagetoolrc.js` (see below).
 
 ## Usage
 
@@ -90,7 +103,13 @@ It will be merged with default config.
 Example of external config:
 
 ```javascript
-module.exports = {
+export default {
+  // LanguageTool HTTP service base URL. `/v2/check` is appended to it,
+  // so a path prefix is preserved, e.g. `https://example.com/languagetool`
+  // becomes `https://example.com/languagetool/v2/check`.
+  languageTool: {
+    url: 'http://127.0.0.1:8081',
+  },
   // allowed words (regexps are supported)
   ignore: [
     '(T|O)TF',
