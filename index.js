@@ -9,18 +9,10 @@ import { pathToFileURL } from 'node:url';
 
 import defaultAppConfig from './.languagetoolrc.js';
 
-import checkJavaInstalled from './lib/check-java-installed.js';
 import createVfile from './lib/create-vfile.js';
 import findConfig from './lib/find-config.js';
 import generateReport from './lib/generate-report.js';
 import { error, info } from './lib/log.js';
-import startLanguageToolServer from './lib/start-language-tool-server.js';
-
-if (!checkJavaInstalled()) {
-	error('To use this command-line tool you need to install a JDK.');
-	info('Please visit the Java Developer Kit download website: https://www.java.com');
-	process.exit(1);
-}
 
 const currentConfigPath = pathToFileURL(findConfig());
 const currentConfig = await import(currentConfigPath);
@@ -44,6 +36,9 @@ const combineMerge = (target, source, options) => {
 
 const appConfig = deepmerge(defaultAppConfig, currentConfigData, { arrayMerge: combineMerge });
 
+const languageToolBaseUrl = String(appConfig.languageTool.url).replace(/\/+$/, '');
+const checkEndpoint = `${languageToolBaseUrl}/v2/check`;
+
 const processArguments = process.argv.slice(2);
 
 let files = [];
@@ -66,16 +61,33 @@ async function check(vfiles) {
 	const spinner = createSpinner().start({ text: 'Processing...' });
 
 	try {
-		const { port } = await startLanguageToolServer();
-
 		for (const vfile of vfiles) {
-			const response = await fetch(`http://127.0.0.1:${port}/v2/check`, { // eslint-disable-line no-await-in-loop
-				method: 'POST',
-				body: new URLSearchParams({
-					language: 'auto',
-					text: String(vfile.value),
-				}).toString(),
-			});
+			let response;
+			try {
+				response = await fetch(checkEndpoint, { // eslint-disable-line no-await-in-loop
+					method: 'POST',
+					body: new URLSearchParams({
+						language: 'auto',
+						text: String(vfile.value),
+					}).toString(),
+				});
+			} catch (error_) {
+				spinner.clear();
+				error(`Cannot reach the LanguageTool service at "${languageToolBaseUrl}".`);
+				info('Start a LanguageTool HTTP service externally (e.g. a LanguageTool Docker image) or configure it in your ~/.languagetoolrc.js:');
+				info('{ languageTool: { url: \'http://127.0.0.1:8081\' } }');
+				info(`Original error: ${error_.message}`);
+				process.exitCode = 1;
+				process.exit();
+			}
+
+			if (!response.ok) {
+				spinner.clear();
+				error(`LanguageTool service at "${checkEndpoint}" responded with HTTP ${response.status} ${response.statusText}.`);
+				info('Check that the configured service is healthy or adjust languageTool.url in your ~/.languagetoolrc.js.');
+				process.exitCode = 1;
+				process.exit();
+			}
 
 			const { matches } = await response.json(); // eslint-disable-line no-await-in-loop
 
