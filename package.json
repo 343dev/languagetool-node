@@ -29,7 +29,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update-git-hooks": "npx simple-git-hooks"
+    "enable-git-hooks": "git config core.hooksPath .githooks"
   },
   "engines": {
     "node": ">=22.22.1"
@@ -44,11 +44,7 @@
   "devDependencies": {
     "@343dev/eslint-config": "5.0.0",
     "eslint": "10.5.0",
-    "lint-staged": "17.0.7",
-    "simple-git-hooks": "2.13.1"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "lint-staged": "17.0.7"
   },
   "lint-staged": {
     "*.js": "eslint --fix"

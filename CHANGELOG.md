@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING:** The CLI now connects to an externally managed LanguageTool HTTP service instead of managing the LanguageTool lifecycle locally. See [MIGRATION.md](MIGRATION.md) for upgrade steps.
 - All dependencies are now pinned to exact versions (caret ranges removed) for reproducible installs.
 - Upgraded `vfile` 6.0.2 -> 6.0.3, `nanospinner` 1.1.0 -> 1.2.2.
-- Upgraded dev dependencies: `lint-staged` 15.2.8 -> 17.0.7, `simple-git-hooks` 2.11.1 -> 2.13.1, `eslint` 8.57.0 -> 9.39.4, `@343dev/eslint-config` 1.0.0 -> 4.0.0.
+- Upgraded dev dependencies: `lint-staged` 15.2.8 -> 17.0.7, `eslint` 8.57.0 -> 9.39.4, `@343dev/eslint-config` 1.0.0 -> 4.0.0.
 
 ### Added
 
@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automatic Java checks and local Java-based LanguageTool server startup.
 - The project `Dockerfile`.
 - Installer-only dependencies `node-stream-zip` and `progress`.
+- `simple-git-hooks`, replaced by a native `pre-commit` hook in `.githooks/`. Contributors must run `npm run enable-git-hooks` once to activate it (`git config core.hooksPath .githooks`).
 
 ## [2.0.0] - 2024-03-21
 
