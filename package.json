@@ -24,12 +24,10 @@
     "lib/",
     ".languagetoolrc.js",
     "index.js",
-    "install.js",
     "logo.png"
   ],
   "scripts": {
     "lint": "eslint .",
-    "postinstall": "node install.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-git-hooks": "npx simple-git-hooks"
   },
@@ -39,8 +37,6 @@
   "dependencies": {
     "deepmerge": "^4.3.1",
     "nanospinner": "^1.1.0",
-    "node-stream-zip": "^1.15.0",
-    "progress": "^2.0.3",
     "vfile": "^6.0.2",
     "vfile-location": "^5.0.3",
     "vfile-reporter": "^8.1.1"
