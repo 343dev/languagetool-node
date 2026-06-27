@@ -42,8 +42,8 @@
     "vfile-reporter": "8.1.1"
   },
   "devDependencies": {
-    "@343dev/eslint-config": "^1.0.0",
-    "eslint": "^8.57.0",
+    "@343dev/eslint-config": "4.0.0",
+    "eslint": "9.39.4",
     "lint-staged": "17.0.7",
     "simple-git-hooks": "2.13.1"
   },
@@ -52,8 +52,5 @@
   },
   "lint-staged": {
     "*.js": "eslint --fix"
-  },
-  "eslintConfig": {
-    "extends": "@343dev"
   }
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable n/no-process-exit -- the CLI intentionally controls its exit codes */
 
 import deepmerge from 'deepmerge';
 import { createSpinner } from 'nanospinner';
@@ -64,7 +65,7 @@ async function check(vfiles) {
 		for (const vfile of vfiles) {
 			let response;
 			try {
-				response = await fetch(checkEndpoint, { // eslint-disable-line no-await-in-loop
+				response = await fetch(checkEndpoint, {
 					method: 'POST',
 					body: new URLSearchParams({
 						language: 'auto',
@@ -89,9 +90,9 @@ async function check(vfiles) {
 				process.exit();
 			}
 
-			const { matches } = await response.json(); // eslint-disable-line no-await-in-loop
+			const { matches } = await response.json();
 
-			const filteredMatches = matches.filter(match => {
+			const filteredMatches = matches.filter((match) => {
 				const { context } = match;
 				const badWord = context.text.slice(context.offset, context.offset + context.length);
 
