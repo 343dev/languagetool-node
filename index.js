@@ -73,7 +73,7 @@ async function check(vfiles) {
 					}).toString(),
 				});
 			} catch (error_) {
-				spinner.clear();
+				spinner.stop();
 				error(`Cannot reach the LanguageTool service at "${languageToolBaseUrl}".`);
 				info('Start a LanguageTool HTTP service externally (e.g. a LanguageTool Docker image) or configure it in your ~/.languagetoolrc.js:');
 				info('{ languageTool: { url: \'http://127.0.0.1:8081\' } }');
@@ -83,7 +83,7 @@ async function check(vfiles) {
 			}
 
 			if (!response.ok) {
-				spinner.clear();
+				spinner.stop();
 				error(`LanguageTool service at "${checkEndpoint}" responded with HTTP ${response.status} ${response.statusText}.`);
 				info('Check that the configured service is healthy or adjust languageTool.url in your ~/.languagetoolrc.js.');
 				process.exitCode = 1;
@@ -105,10 +105,10 @@ async function check(vfiles) {
 			}
 		}
 
-		spinner.clear();
+		spinner.stop();
 		console.log(reporter(vfiles, { quiet: true }));
 	} catch (error_) {
-		spinner.clear();
+		spinner.stop();
 		error(error_);
 		process.exitCode = 1;
 	}
