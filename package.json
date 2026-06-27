@@ -38,7 +38,7 @@
     "deepmerge": "4.3.1",
     "nanospinner": "^1.1.0",
     "vfile": "^6.0.2",
-    "vfile-location": "^5.0.3",
+    "vfile-location": "5.0.3",
     "vfile-reporter": "^8.1.1"
   },
   "devDependencies": {
