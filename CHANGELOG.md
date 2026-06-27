@@ -9,7 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **BREAKING:** Minimum Node.js version is now 22.22.1 (raised from 18.17), required by `lint-staged@17` and `@343dev/eslint-config@4`.
 - **BREAKING:** The CLI now connects to an externally managed LanguageTool HTTP service instead of managing the LanguageTool lifecycle locally. See [MIGRATION.md](MIGRATION.md) for upgrade steps.
+- All dependencies are now pinned to exact versions (caret ranges removed) for reproducible installs.
+- Upgraded `vfile` 6.0.2 -> 6.0.3, `nanospinner` 1.1.0 -> 1.2.2.
+- Upgraded dev dependencies: `lint-staged` 15.2.8 -> 17.0.7, `simple-git-hooks` 2.11.1 -> 2.13.1, `eslint` 8.57.0 -> 9.39.4, `@343dev/eslint-config` 1.0.0 -> 4.0.0.
+
+### Added
+
+- `eslint.config.js` flat config, replacing the legacy `eslintConfig` block in `package.json` (required by ESLint 9, which removed the eslintrc format).
 
 ### Removed
 
