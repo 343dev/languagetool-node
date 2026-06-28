@@ -1,7 +1,0 @@
-*
-!lib/
-!.languagetoolrc.js
-!index.js
-!install.js
-!LICENSE
-!package*.json

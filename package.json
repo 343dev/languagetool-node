@@ -1,6 +1,6 @@
 {
   "name": "@343dev/languagetool-node",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Node.js wrapper for LanguageTool",
   "keywords": [
     "spellcheck",
@@ -24,40 +24,29 @@
     "lib/",
     ".languagetoolrc.js",
     "index.js",
-    "install.js",
     "logo.png"
   ],
   "scripts": {
     "lint": "eslint .",
-    "postinstall": "node install.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update-git-hooks": "npx simple-git-hooks"
+    "enable-git-hooks": "git config core.hooksPath .githooks"
   },
   "engines": {
-    "node": ">=18.17"
+    "node": ">=22.22.1"
   },
   "dependencies": {
-    "deepmerge": "^4.3.1",
-    "nanospinner": "^1.1.0",
-    "node-stream-zip": "^1.15.0",
-    "progress": "^2.0.3",
-    "vfile": "^6.0.2",
-    "vfile-location": "^5.0.3",
-    "vfile-reporter": "^8.1.1"
+    "deepmerge": "4.3.1",
+    "nanospinner": "1.2.2",
+    "vfile": "6.0.3",
+    "vfile-location": "5.0.3",
+    "vfile-reporter": "8.1.1"
   },
   "devDependencies": {
-    "@343dev/eslint-config": "^1.0.0",
-    "eslint": "^8.57.0",
-    "lint-staged": "^15.2.8",
-    "simple-git-hooks": "^2.11.1"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "@343dev/eslint-config": "5.0.0",
+    "eslint": "10.5.0",
+    "lint-staged": "17.0.7"
   },
   "lint-staged": {
     "*.js": "eslint --fix"
-  },
-  "eslintConfig": {
-    "extends": "@343dev"
   }
 }

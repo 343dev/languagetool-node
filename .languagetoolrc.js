@@ -1,11 +1,8 @@
 export default {
-  downloadUrls: {
-    stable: {
-			url: 'https://languagetool.org/download/LanguageTool-6.3.zip',
-			md5: '78ae790647488e8602833e56c1fbae17',
-    },
-  },
-  ignore: [
-    'фронт(е|э)нд'
-  ],
+	languageTool: {
+		url: 'http://127.0.0.1:8081',
+	},
+	ignore: [
+		'фронт(е|э)нд',
+	],
 };
