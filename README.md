@@ -15,8 +15,6 @@ Hence, we decided to build our own CLI tool upon the LanguageTool.
 
 ## Getting Started
 
-Since version 3.0 this package no longer downloads, installs, or starts LanguageTool. You must run a LanguageTool HTTP service yourself and point the CLI at it.
-
 Install the package:
 
 ```shell
