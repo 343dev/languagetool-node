@@ -1,30 +1,25 @@
 # @343dev/languagetool-node
 
-<img align="right" width="124" height="124"
-     src="./logo.png">
+<img align="right" width="124" height="124" src="./logo.png">
 
-[![NPM Downloads](https://img.shields.io/npm/dw/%40343dev%2Flanguagetool-node)](https://www.npmjs.com/package/@343dev/languagetool-node)
+[![NPM Downloads](https://img.shields.io/npm/dw/@343dev/languagetool-node)](https://www.npmjs.com/package/@343dev/languagetool-node)
 [![npm](https://img.shields.io/npm/v/@343dev/languagetool-node.svg)](https://www.npmjs.com/package/@343dev/languagetool-node)
 
-CLI spell and grammar checker.
-Sends checks to an externally managed [LanguageTool](https://github.com/languagetool-org/languagetool) HTTP service.
+CLI spell and grammar checker. Sends checks to an externally managed [LanguageTool](https://github.com/languagetool-org/languagetool) HTTP service.
 
 ## Rationale
 
-Some projects have a lot of documentation inside the repos. Once we decided to start linting their
-grammar and check for spelling errors. But we didn't want to send our docs
-to the unknown servers of the well-known services.
+Some projects have a lot of documentation inside the repos. Once we decided to start linting their grammar and check for spelling errors. But we didn’t want to send our docs to the unknown servers of the well-known services.
 
-Hence, we decided to build our own CLI tool upon the LanguageTool.
+Hence, we decided to build our own CLI tool upon the LanguageTool.
 
 ## Getting Started
 
-Since version 3.0 this package no longer downloads, installs, or starts LanguageTool.
-You must run a LanguageTool HTTP service yourself and point the CLI at it.
+Since version 3.0 this package no longer downloads, installs, or starts LanguageTool. You must run a LanguageTool HTTP service yourself and point the CLI at it.
 
 Install the package:
 
-```bash
+```shell
 npm i -g @343dev/languagetool-node
 ```
 
@@ -35,40 +30,52 @@ Run a LanguageTool service. The easiest way is an official-style Docker image, f
 
 Example:
 
-```bash
+```shell
 docker run --rm -p 8081:8081 erikvl87/languagetool
 ```
 
-Check the selected image's documentation for its exposed port and configuration.
-The CLI defaults to `http://127.0.0.1:8081`. If your service runs elsewhere, set
-`languageTool.url` in `~/.languagetoolrc.js` (see below).
+Check the selected image’s documentation for its exposed port and configuration. The CLI defaults to `http://127.0.0.1:8081`. If your service runs elsewhere, set `languageTool.url` in `~/.languagetoolrc.js` (see below).
 
 ## Usage
 
-The tool can check the passed files or the text from STDIN.
+The tool can check the passed files or the text from STDIN.
 
 Check files:
 
-```bash
+```shell
 languagetool-node README.md CHANGELOG.md
 ```
 
 Check files defined using globs:
 
-```bash
+```shell
 languagetool-node ~/project1/**/*.txt ~/project2/*.md
 ```
 
 Check the text from STDIN:
 
-```bash
+```shell
 echo "Insert your text here .. or check this textt. LanguageTool 4.0 were releasd on Thursday 29 december 2017." | languagetool-node
+```
+
+Running `languagetool-node` with no arguments (and no piped stdin) prints usage and exits non-zero, so you can always rediscover how to drive the tool.
+
+### Options
+
+- `-h`, `--help` — Print usage and exit. Takes precedence over everything else.
+- `-V`, `--version` — Print the CLI version and exit.
+- `-u`, `--url <url>` — Override the LanguageTool service URL for this run only (beats config).
+
+The `--url` flag accepts the same forms as `languageTool.url` in config: an origin (`http://127.0.0.1:8081`), a URL with a path prefix (`https://example.com/languagetool`), or a URL with a trailing slash (trimmed). `/v2/check` is appended automatically.
+
+```shell
+languagetool-node --url http://127.0.0.1:9090 README.md
 ```
 
 <details>
   <summary>Output example</summary>
 
-  ```bash
+  ```shell
   $ echo "Insert your text here .. or check this textt. LanguageTool 4.0 were releasd on Thursday 29 december 2017." | languagetool-node
 
   <stdin>
@@ -97,10 +104,9 @@ echo "Insert your text here .. or check this textt. LanguageTool 4.0 were releas
 
 ## External configuration file
 
-It's possible to override default options by creating file `~/.languagetoolrc.js`.
-It will be merged with default config.
+It’s possible to override default options by creating file `~/.languagetoolrc.js`. It will be merged with default config.
 
-Example of external config:
+Example of external config:
 
 ```javascript
 export default {
@@ -119,7 +125,7 @@ export default {
 
 ## Credits
 
-The picture for the project was made by [Sergey Mylnikov](https://www.behance.net/s_mylnikov) & [Igor Garybaldi](https://pandabanda.com/).
+The picture for the project was made by [Sergey Mylnikov](https://www.behance.net/s_mylnikov) & [Igor Garybaldi](https://pandabanda.com/).
 
 ## Other projects
 

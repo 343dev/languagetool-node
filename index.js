@@ -13,7 +13,29 @@ import defaultAppConfig from './.languagetoolrc.js';
 import createVfile from './lib/create-vfile.js';
 import findConfig from './lib/find-config.js';
 import generateReport from './lib/generate-report.js';
-import { error, info } from './lib/log.js';
+import { error, info, warning } from './lib/log.js';
+import parseArguments from './lib/parse-arguments.js';
+import usage from './lib/usage.js';
+import version from './lib/version.js';
+
+let parsedArguments;
+try {
+	parsedArguments = parseArguments(process.argv.slice(2));
+} catch (error_) {
+	error(error_.message);
+	process.exitCode = 1;
+	process.exit();
+}
+
+if (parsedArguments.help) {
+	console.log(usage());
+	process.exit(0);
+}
+
+if (parsedArguments.version) {
+	console.log(version());
+	process.exit(0);
+}
 
 const currentConfigPath = pathToFileURL(findConfig());
 const currentConfig = await import(currentConfigPath);
@@ -37,21 +59,38 @@ const combineMerge = (target, source, options) => {
 
 const appConfig = deepmerge(defaultAppConfig, currentConfigData, { arrayMerge: combineMerge });
 
+if (parsedArguments.url !== undefined) {
+	appConfig.languageTool.url = parsedArguments.url;
+}
+
 const languageToolBaseUrl = String(appConfig.languageTool.url).replace(/\/+$/, '');
 const checkEndpoint = `${languageToolBaseUrl}/v2/check`;
-
-const processArguments = process.argv.slice(2);
 
 let files = [];
 
 if (!process.stdin.isTTY && process.platform !== 'win32') {
 	// When Git BASH terminal is used we can't get data from STDIN.
 	// That's why it's turned off here, and it's impossible to use STDIN in Windows.
-	files.push(createVfile());
+	const stdinVfile = createVfile();
+	if (String(stdinVfile.value).length === 0) {
+		process.exit(0);
+	}
+	files.push(stdinVfile);
+} else if (parsedArguments.files.length === 0) {
+	console.log(usage());
+	process.exit(1);
 } else {
-	files = processArguments
-		.filter(file => fs.existsSync(file))
-		.map(createVfile); // eslint-disable-line unicorn/no-array-callback-reference
+	for (const candidate of parsedArguments.files) {
+		if (fs.existsSync(candidate)) {
+			files.push(createVfile(candidate));
+		} else {
+			warning(`File not found: ${candidate}`);
+		}
+	}
+
+	if (files.length === 0) {
+		process.exit(1);
+	}
 }
 
 if (files.length > 0) {

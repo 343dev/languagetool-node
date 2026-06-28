@@ -17,6 +17,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `--help` / `-h` prints usage and exits `0`.
+- `--version` / `-V` prints the package version and exits `0`.
+- `--url` / `-u <url>` overrides `languageTool.url` for a single invocation with the highest precedence (flag > user config > default).
+- Usage is now printed when the CLI is run interactively with no input (no piped stdin and no file arguments).
+- A warning is now emitted for each file argument that does not resolve to an existing path.
+
+### Changed
+
+- **BREAKING:** Running the CLI interactively with no arguments now exits with code `1` (previously exited `0` silently). Scripts relying on the old silent no-op behavior must pass explicit input.
+- An empty piped STDIN no longer triggers an HTTP request to the LanguageTool service; the CLI exits `0` immediately.
+- Argument parsing moved before configuration loading so `--help` and `--version` work even if `~/.languagetoolrc.js` is broken.
+
+### Added
+
 - `eslint.config.js` flat config, replacing the legacy `eslintConfig` block in `package.json` (required by ESLint 9, which removed the eslintrc format).
 
 ### Removed
