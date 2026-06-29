@@ -32,7 +32,14 @@
     "enable-git-hooks": "git config core.hooksPath .githooks"
   },
   "engines": {
-    "node": ">=22.22.1"
+    "node": ">=18.17"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=22.22.1",
+      "onFail": "error"
+    }
   },
   "dependencies": {
     "deepmerge": "4.3.1",

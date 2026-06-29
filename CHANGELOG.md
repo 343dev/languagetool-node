@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.1] - 2026-06-29
+
+### Changed
+
+- Split runtime and development Node.js version requirements so the runtime floor is no longer inflated by dev-only tooling. `engines.node` (the version consumers need to *run* the CLI) is restored to `>=18.17`; the `>=22.22.1` floor required by `lint-staged@17` now lives in `devEngines.runtime` and applies only to contributors working on the source.
+
 ## [3.0.0] - 2026-06-28
 
 ### Changed
