@@ -1,6 +1,6 @@
 {
   "name": "@343dev/languagetool-node",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Node.js wrapper for LanguageTool",
   "keywords": [
     "spellcheck",
